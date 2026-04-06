@@ -1,0 +1,41 @@
+========================================================================
+PP RISK CALCULATOR: Training and Evaluation
+========================================================================
+Train: 3544 (PP=1870, Non-PP=1674)
+Test:  920 (PP=529, Non-PP=391)
+
+--- Test Set Performance ---
+XGBoost AUC:           0.876
+Logistic Reg AUC:      0.857
+XGBoost 95% CI:        [0.854, 0.896]
+Brier score:           0.1474
+
+--- Feature Importance ---
+  Bone Age Advance (years)  0.538
+  Age (years)               0.189
+  IGF-1 (ng/mL)             0.129
+  Sex (Female=1)            0.065
+  FSH (mIU/mL)              0.034
+  LH (mIU/mL)               0.029
+  Estradiol (pg/mL)         0.015
+
+--- Optimal Threshold (Youden's J) ---
+  Threshold: 0.508
+  Sensitivity: 0.790
+  Specificity: 0.811
+
+--- Clinical Operating Points ---
+  High sensitivity (0.3):
+    Sens=0.902 Spec=0.616 PPV=0.761 NPV=0.823
+  Balanced (Youden):
+    Sens=0.790 Spec=0.811 PPV=0.850 NPV=0.741
+  High specificity (0.7):
+    Sens=0.561 Spec=0.934 PPV=0.920 NPV=0.611
+
+--- Simple Screening Rule: BA advance >= 1 year ---
+  Sensitivity: 0.701
+  Specificity: 0.790
+
+Models saved to /Users/ynh83/Desktop/04062026 PP/models/
+
+Saved: Fig_risk_calculator.png

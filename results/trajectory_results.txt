@@ -1,0 +1,76 @@
+========================================================================
+PER-PATIENT TRAJECTORY PREDICTION FOR PP RISK
+========================================================================
+
+[Step 1] Identifying patients with >= 3 lab measurements...
+  Patients with >= 3 measurements in any hormone: 2933
+  PP: 1564, Non-PP: 1369
+
+[Step 2] Extracting trajectory features...
+  Feature matrix: (2933, 45)
+
+[Step 3] Comparing static-only vs trajectory-enhanced models...
+  Static features (6): ['age', 'sex_num', 'LH_first_val', 'FSH_first_val', 'IGF-1_first_val', 'ba_advance_first']
+  Trajectory features (22): ['LH_slope', 'LH_accel', 'LH_cv', 'LH_range', 'LH_last_val', 'LH_span_months', 'FSH_slope', 'FSH_accel', 'FSH_cv', 'FSH_range', 'FSH_last_val', 'FSH_span_months', 'IGF-1_slope', 'IGF-1_accel', 'IGF-1_cv', 'IGF-1_range', 'IGF-1_last_val', 'IGF-1_span_months', 'BA_slope', 'BA_accel', 'ba_advance_change', 'ba_advance_last']
+  Combined (28)
+
+  Train: 2315 (PP=1221)
+  Test:  618 (PP=343)
+  Static only               AUC = 0.873 (6 features)
+  Trajectory only           AUC = 0.862 (22 features)
+  Static + Trajectory       AUC = 0.863 (28 features)
+
+  Top 10 features (Static + Trajectory):
+    ba_advance_first               0.4830
+    IGF-1_first_val                0.0867
+    age                            0.0665
+    BA_accel                       0.0391
+    IGF-1_cv                       0.0316
+    sex_num                        0.0295
+    ba_advance_last                0.0271
+    BA_slope                       0.0253
+    IGF-1_span_months              0.0238
+    FSH_span_months                0.0182
+
+[Step 4] Foundation model per-patient forecasting (sample)...
+  Forecasting LH trajectories for 3 PP + 3 non-PP patients...
+  Patient 4A613414-5344-438D-B299-4550723F75B9 (PP): LH history [0.1..2.6] -> TimesFM forecast [2.0..1.7]
+  Patient 607CD709-02F1-433E-AE1A-BEF221CFD5CD (PP): LH history [0.2..0.3] -> TimesFM forecast [0.3..0.3]
+  Patient AEA3C3B8-5BAD-46D0-B95B-7B6D78E614D3 (PP): LH history [0.2..0.4] -> TimesFM forecast [0.5..0.4]
+  Patient 08BBBF13-6F15-4F40-BA93-3D9DB2FEFBF4 (Non-PP): LH history [0.4..3.0] -> TimesFM forecast [1.2..1.0]
+  Patient 1FB71D56-53AE-468D-AECE-1ADD35A4D619 (Non-PP): LH history [1.8..0.2] -> TimesFM forecast [0.2..0.1]
+
+[Step 5] Dynamic risk update concept...
+  Concept: As new visits arrive, re-extract trajectory features
+  and re-predict using the Static+Trajectory model.
+  This provides 'living' risk scores that update with each visit.
+
+  Simulating dynamic risk for patients with >= 6 visits...
+  Demonstrating on 5 patients with >= 6 LH measurements
+    Patient 08BBBF13-6F15-4F40-BA93-3D9DB2FEFBF4 (Ctrl): visit3:9%, visit4:9%, visit5:9%, visit6:9%
+    Patient 5E8EC2DE-6735-4A18-BA99-C586E14D156F (PP): visit3:17%, visit4:17%, visit5:17%, visit6:17%, visit7:17%
+    Patient AEA3C3B8-5BAD-46D0-B95B-7B6D78E614D3 (PP): visit3:9%, visit4:9%, visit5:9%, visit6:9%, visit7:9%
+    Patient FC345B07-DD9F-4C7B-827E-85B6890A3429 (PP): visit3:11%, visit4:11%, visit5:11%, visit6:11%, visit7:11%
+    Patient 1FB71D56-53AE-468D-AECE-1ADD35A4D619 (Ctrl): visit3:9%, visit4:17%, visit5:17%, visit6:17%, visit7:17%
+
+Saved: Fig_trajectory_prediction.png
+
+========================================================================
+SUMMARY: PER-PATIENT TRAJECTORY PREDICTION
+========================================================================
+Patients with longitudinal data (>= 3 measurements): 2933
+  PP: 1564, Non-PP: 1369
+
+  Static only               AUC = 0.873
+  Trajectory only           AUC = 0.862
+  Static + Trajectory       AUC = 0.863
+
+Trajectory improvement: -0.010 AUC
+-> First-visit data already captures most predictive signal
+   (bone age advancement at first visit is the dominant feature)
+
+Foundation model forecasting (TimesFM/Chronos) enables:
+  1. Dynamic risk updates as new visits arrive
+  2. Per-patient hormone trajectory visualization
+  3. Projected bone age advancement curve
+  4. Early warning when trajectory diverges from normal range
