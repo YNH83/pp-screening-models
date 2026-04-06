@@ -149,11 +149,28 @@
 
 ---
 
+### 10_timesfm_forecast.py
+
+**Purpose**: Head-to-head comparison of TimesFM (Google, 498M) vs Chronos (Amazon, 46M) vs AutoARIMA on 6 clinical time series with 12-month held-out test.
+
+| Component | Source | Citation |
+|-----------|--------|----------|
+| `TimesFmModelForPrediction.from_pretrained("google/timesfm-2.0-500m-pytorch")` | HuggingFace / transformers | Das et al. (2024). A decoder-only foundation model for time-series forecasting. *ICML 2024*. arXiv:2310.10688. |
+| `ChronosPipeline.from_pretrained("amazon/chronos-t5-small")` | HuggingFace | Ansari et al. (2024). Chronos. *arXiv:2403.07815*. |
+| `AutoARIMA(season_length=12)` | statsforecast | Hyndman & Khandakar (2008). |
+
+**TimesFM Specs**: decoder-only transformer, 498M params, 50 layers, 16 heads, patch_length=32, context_length=2048, pretrained on 100B+ time points (Google Trends, Wiki, synthetic). Quantile outputs (10th-90th percentile).
+
+**Key Result**: On 6 clinical time series (12-month held-out test), Chronos (46M) slightly outperforms TimesFM (498M) on 3/6 series, AutoARIMA wins on 2/6 (low-noise hormone means), TimesFM wins on 1/6. Foundation models dominate on count data; classical methods competitive on smooth trends.
+
+---
+
 ## Pretrained Model Downloads
 
 | Model | Source | Download |
 |-------|--------|----------|
 | Chronos-T5-Small | Hugging Face | `amazon/chronos-t5-small` (auto-downloaded on first run via `ChronosPipeline.from_pretrained`) |
+| TimesFM 2.0 500M | Hugging Face | `google/timesfm-2.0-500m-pytorch` (auto-downloaded via `TimesFmModelForPrediction.from_pretrained`) |
 
 All other models (XGBoost, LR, LSTM, Transformer) are trained from scratch on the clinical dataset. No pretrained weights are used for classification models.
 

@@ -1,0 +1,109 @@
+========================================================================
+TimesFM vs Chronos vs AutoARIMA: Foundation Model Comparison
+========================================================================
+TimesFM: Das et al. (2024). ICML. google/timesfm-2.0-500m-pytorch
+Chronos: Ansari et al. (2024). amazon/chronos-t5-small
+AutoARIMA: Hyndman & Khandakar (2008). statsforecast
+========================================================================
+
+Loaded 6 time series
+
+Strategy: train on all-but-last-12, test on last 12 months
+
+--- New patients ---
+  Total months: 119, Train: 107, Test: 12
+  Running TimesFM...
+  Running Chronos...
+  Running AutoARIMA...
+  TimesFM  MAE=   10.4  MAPE= 41.5%
+  Chronos  MAE=   10.6  MAPE= 42.6%
+  AutoARIMA MAE=   10.7  MAPE= 48.7%
+  Winner: TimesFM (MAE=10.4)
+
+--- Total visits ---
+  Total months: 119, Train: 107, Test: 12
+  Running TimesFM...
+  Running Chronos...
+  Running AutoARIMA...
+  TimesFM  MAE=  127.4  MAPE= 19.5%
+  Chronos  MAE=  126.3  MAPE= 19.5%
+  AutoARIMA MAE=  172.3  MAPE= 26.2%
+  Winner: Chronos (MAE=126.3)
+
+--- PP visits (E30.1) ---
+  Total months: 119, Train: 107, Test: 12
+  Running TimesFM...
+  Running Chronos...
+  Running AutoARIMA...
+  TimesFM  MAE=   65.3  MAPE= 20.9%
+  Chronos  MAE=   53.4  MAPE= 16.3%
+  AutoARIMA MAE=   87.9  MAPE= 27.7%
+  Winner: Chronos (MAE=53.4)
+
+--- SS visits (R62.52) ---
+  Total months: 119, Train: 107, Test: 12
+  Running TimesFM...
+  Running Chronos...
+  Running AutoARIMA...
+  TimesFM  MAE=   64.3  MAPE= 18.6%
+  Chronos  MAE=   57.9  MAPE= 15.4%
+  AutoARIMA MAE=   71.7  MAPE= 22.9%
+  Winner: Chronos (MAE=57.9)
+
+--- LH monthly mean ---
+  Total months: 119, Train: 107, Test: 12
+  Running TimesFM...
+  Running Chronos...
+  Running AutoARIMA...
+  TimesFM  MAE=    0.8  MAPE= 25.1%
+  Chronos  MAE=    0.9  MAPE= 28.4%
+  AutoARIMA MAE=    0.6  MAPE= 19.4%
+  Winner: AutoARIMA (MAE=0.6)
+
+--- IGF-1 monthly mean ---
+  Total months: 119, Train: 107, Test: 12
+  Running TimesFM...
+  Running Chronos...
+  Running AutoARIMA...
+  TimesFM  MAE=   28.8  MAPE=  9.8%
+  Chronos  MAE=   26.3  MAPE=  8.9%
+  AutoARIMA MAE=   24.2  MAPE=  8.3%
+  Winner: AutoARIMA (MAE=24.2)
+
+========================================================================
+SUMMARY: Head-to-Head Foundation Model Comparison
+========================================================================
+
+Series                     TimesFM MAE  Chronos MAE  ARIMA MAE     Winner
+------------------------------------------------------------------------
+New patients                      10.4         10.6       10.7    TimesFM
+Total visits                     127.4        126.3      172.3    Chronos
+PP visits (E30.1)                 65.3         53.4       87.9    Chronos
+SS visits (R62.52)                64.3         57.9       71.7    Chronos
+LH monthly mean                    0.8          0.9        0.6  AutoARIMA
+IGF-1 monthly mean                28.8         26.3       24.2  AutoARIMA
+
+Win count: TimesFM=1, Chronos=3, AutoARIMA=2
+
+Saved: Fig_timesfm_comparison.png
+
+========================================================================
+MODEL CITATIONS
+========================================================================
+TimesFM 2.0:
+  Das A, Kong W, Leber A, Mathews R, Rajagopalan K, et al.
+  'A decoder-only foundation model for time-series forecasting.'
+  ICML 2024. arXiv:2310.10688.
+  HuggingFace: google/timesfm-2.0-500m-pytorch (498M params)
+  GitHub: https://github.com/google-research/timesfm
+
+Chronos:
+  Ansari AF, Stella L, Turkmen C, Zhang X, et al.
+  'Chronos: Learning the language of time series.'
+  arXiv:2403.07815, 2024.
+  HuggingFace: amazon/chronos-t5-small (46M params)
+
+AutoARIMA:
+  Hyndman RJ, Khandakar Y.
+  'Automatic time series forecasting: the forecast package for R.'
+  J Statistical Software, 27(3), 2008.

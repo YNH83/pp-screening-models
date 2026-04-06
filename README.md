@@ -32,6 +32,7 @@ pp-screening-models/
 |   +-- 07_lin28b_phewas.py              # LIN28B pleiotropy evidence (GWAS Catalog)
 |   +-- 08_leave_one_year_out_cv.py      # LOYO-CV temporal quasi-external validation
 |   +-- 09_control_group_deep.py         # R1.1 deep sensitivity (gradient, PSM, decomposition)
+|   +-- 10_timesfm_forecast.py          # TimesFM (Google) vs Chronos (Amazon) vs AutoARIMA
 +-- results/                      # Analysis output summaries
 |   +-- subclinical_results.txt
 |   +-- forecast_results.txt
@@ -41,6 +42,7 @@ pp-screening-models/
 |   +-- lin28b_phewas_results.txt
 |   +-- loyo_cv_results.txt
 |   +-- r1_1_deep_results.txt
+|   +-- timesfm_results.txt
 +-- docs/
     +-- figures_index.md          # Figure catalog
 ```
@@ -61,6 +63,7 @@ pp-screening-models/
 | Model | Library | Version | Reference |
 |-------|---------|---------|-----------|
 | Chronos-T5-Small | amazon/chronos | >=1.0 | Ansari et al. (2024). Chronos: Learning the language of time series. *arXiv:2403.07815*. Hugging Face: `amazon/chronos-t5-small`. |
+| TimesFM 2.0 | google/timesfm | 2.0 | Das et al. (2024). A decoder-only foundation model for time-series forecasting. *ICML 2024*. arXiv:2310.10688. Hugging Face: `google/timesfm-2.0-500m-pytorch` (498M params). GitHub: [google-research/timesfm](https://github.com/google-research/timesfm). |
 | AutoARIMA | statsforecast | >=1.5 | Hyndman & Khandakar (2008). Automatic time series forecasting: The forecast package for R. *J Statistical Software*, 27(3). Garza et al. (2022). StatsForecast: Lightning fast forecasting with statistical and econometric models. |
 | AutoETS | statsforecast | >=1.5 | Hyndman et al. (2002). A state space framework for automatic forecasting using exponential smoothing methods. *IJF*, 18(3), 439-454. |
 
@@ -147,6 +150,9 @@ python src/08_leave_one_year_out_cv.py
 
 # Deep control-group sensitivity
 python src/09_control_group_deep.py
+
+# TimesFM vs Chronos vs AutoARIMA comparison
+python src/10_timesfm_forecast.py
 ```
 
 **Note**: Scripts expect decrypted data files in a `raw data/` subdirectory relative to the project root. Paths are configurable via the `DATA` constant at the top of each script.
