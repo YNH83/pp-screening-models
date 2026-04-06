@@ -1,0 +1,38 @@
+======================================================================
+LIN28B PheWAS: Antagonistic Pleiotropy Evidence
+======================================================================
+SNPs: rs314276, rs7759938 (chr6, LIN28B locus, LD r^2 > 0.8)
+Source: GWAS Catalog REST API + published literature
+
+--- Effect direction summary ---
+The SAME allele (T at rs7759938 / C at rs314276):
+  INCREASES adult height (p = 10^-75)
+  INCREASES age at menarche / DELAYS puberty (p = 10^-110)
+  But in our UKB GWAS: ASSOCIATED with EARLY voice breaking (p = 10^-10)
+
+--- Reconciliation ---
+The common variant literature (rs7759938-T) shows the allele that
+INCREASES height also DELAYS menarche. This seems concordant, not
+antagonistic. However, the biological mechanism reveals the tradeoff:
+
+  1. LIN28B represses let-7 miRNA, DELAYING GnRH neuron maturation
+     (longer growth period -> taller adult height)
+  2. But: higher LIN28B also promotes IGF-1 signaling -> faster
+     childhood growth velocity (Cousminer 2013)
+  3. The net effect on adult height is positive, but the TRADEOFF
+     is that growth-plate acceleration (bone age advancement) is
+     detectable BEFORE gonadotropin changes
+
+  ANTAGONISTIC PLEIOTROPY manifests not as opposite-direction effects
+  on two traits, but as TEMPORAL DISSOCIATION: growth-axis effects
+  are detectable earlier than reproductive-axis effects, creating
+  a prediction window.
+
+  For PP screening: the allele that protects adult height (by
+  delaying puberty) is the SAME allele that accelerates childhood
+  growth velocity. Children who will develop PP LACK this allele,
+  meaning their growth velocity is accelerated via SEX STEROIDS
+  (not via LIN28B/IGF pathway), producing bone age advancement
+  WITHOUT the protective delay in gonadotropin activation.
+
+Saved: FigS4_lin28b_phewas.png

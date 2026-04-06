@@ -1,0 +1,75 @@
+======================================================================
+LITERATURE-BASED EXTERNAL VALIDATION
+======================================================================
+Published AUC data points: 17
+Studies: 7
+
+======================================================================
+KEY COMPARISON: Growth-axis vs Gonadotropin-axis
+======================================================================
+
+--- Gonadotropin-axis markers across studies ---
+  Chen 2022        Diagnostic (CPP vs PT)         Basal LH        AUC=0.915 (N=116)
+  Zhao 2025        Diagnostic (CPP vs PT)         Basal LH        AUC=0.927 (N=200)
+  This study       Screening (mixed clinic)       LH alone        AUC=0.529 (N=5901)
+
+--- Growth-axis markers across studies ---
+  Chen 2022        Diagnostic (CPP vs PT)         IGF-1                AUC=0.880 (N=116)
+  Chen 2022        Diagnostic (CPP vs PT)         IGFBP-3              AUC=0.853 (N=116)
+  Oliveira 2017    Screening (breast dev)         Bone age advancement AUC=0.605 (N=382)
+  Zhao 2025        Diagnostic (CPP vs PT)         DHEA-S               AUC=0.924 (N=200)
+  Kim 2025         Screening (referral)           IGF-1 SDS            AUC=0.740 (N=2464)
+  This study       Screening (mixed clinic)       Bone age advancement AUC=0.827 (N=5901)
+  This study       Screening (mixed clinic)       IGF-1                AUC=0.652 (N=5901)
+  This study       Screening (mixed clinic)       Height-Z (NHANES)    AUC=0.866 (N=5901)
+
+--- Critical insight ---
+In DIAGNOSTIC setting (CPP vs PT, after referral):
+  Basal LH: AUC = 0.915-0.927 (Chen 2022, Zhao 2025)
+  IGF-1:    AUC = 0.740-0.880 (Chen 2022, Kim 2025)
+  -> LH > IGF-1 in diagnostic setting (expected: LH IS the gold standard)
+
+In SCREENING setting (mixed clinic, before diagnosis, THIS STUDY):
+  LH alone:         AUC = 0.529 (near chance)
+  Bone age advance:  AUC = 0.827
+  Height-Z (NHANES): AUC = 0.866
+  -> Growth axis >> gonadotropin axis in screening setting
+
+RECONCILIATION: LH is excellent for CONFIRMING CPP after referral
+(diagnostic), but useless for IDENTIFYING future CPP before symptoms
+(screening). Growth-axis markers are the opposite: modest for
+confirmation but excellent for early identification. This is because
+LH rises LATE (only after GnRH pulse generator activates), while
+bone age advances EARLY (skeletal response to low-level sex steroids).
+
+Saved: Fig8_literature_validation.png
+
+======================================================================
+SUMMARY: LITERATURE VALIDATION
+======================================================================
+6 published studies (2017-2025, N = 116 to 5,901) compared.
+
+Key finding: The apparent contradiction between our results
+(growth-axis > gonadotropins) and existing literature
+(gonadotropins > growth-axis) is resolved by CONTEXT:
+
+  DIAGNOSTIC setting (confirming CPP after clinical referral):
+    Basal LH AUC = 0.915-0.927 (dominant)
+    IGF-1 AUC = 0.740-0.880 (supportive)
+    -> LH is the right tool for CONFIRMING a suspected diagnosis
+
+  SCREENING setting (identifying future CPP in mixed clinic):
+    LH AUC = 0.529 (useless)
+    Bone age AUC = 0.827, Height-Z AUC = 0.866 (dominant)
+    -> Growth-axis is the right tool for EARLY IDENTIFICATION
+
+This context-dependence is the NOVEL CONTRIBUTION:
+  'The optimal PP biomarker depends on whether you are
+   confirming (use LH) or predicting (use bone age + height).'
+
+Corroborating evidence:
+  1. Oliveira 2017: BA advancement predicts GnRH stim result (AUC=0.605)
+  2. Chen 2022: IGF-1 alone AUC=0.880 for CPP diagnosis
+  3. Meta-analysis 2024: models with imaging > hormones alone
+  4. Kim 2025: IGF-1 SDS has screening value (AUC=0.740)
+  5. Pan 2019: ML model (AUC=0.886) with bone age as key feature

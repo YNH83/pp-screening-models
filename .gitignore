@@ -1,0 +1,27 @@
+# Data (protected / large)
+raw data/
+*.xlsx
+*.xpt
+*.csv
+*.zip
+*.docx
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Outputs (regeneratable)
+figures/
+drafts/
+*.png

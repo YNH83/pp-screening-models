@@ -1,0 +1,68 @@
+======================================================================
+SENSITIVITY ANALYSES (addressing top reviewer concerns)
+======================================================================
+
+======================================================================
+[1] CONTROL GROUP SENSITIVITY (R1.1)
+======================================================================
+
+--- Scenario A: Original (PP vs all non-PP) ---
+  N_train=3544 (PP=1870), N_test=920 (PP=529)
+  AUC = 0.880
+
+--- Scenario B: PP vs non-short-stature controls ---
+  N_train=2234 (PP=1870, ctrl=364)
+  N_test=564 (PP=529, ctrl=35)
+  AUC = 0.709
+
+--- Scenario C: PP-internal (LH-normal vs LH-elevated) ---
+  PP with LH data: N=2399 (LH>0.5: 1261, LH<=0.5: 1138)
+  BA advance AUC (LH-normal PP vs LH-normal ctrl): 0.774 (p=5.15e-99)
+  PP LH-normal BA advance: mean=0.90, ctrl: mean=-0.97
+  -> Bone age STILL discriminates PP even when LH is normal
+
+======================================================================
+[2] BOOTSTRAP AUC CI + CALIBRATION (R2.1)
+======================================================================
+
+  XGBoost AUC = 0.880 (95% CI: [0.858, 0.902])
+  Bootstrap iterations: 1000
+  Brier score: 0.1461 (lower = better calibrated)
+
+======================================================================
+[3] PERMUTATION IMPORTANCE (R2.2)
+======================================================================
+
+  Permutation importance (AUC drop when shuffled):
+    Age             mean=+0.1271 std=0.0068
+    Sex             mean=+0.0149 std=0.0029
+    LH              mean=+0.0024 std=0.0026
+    FSH             mean=+0.0090 std=0.0030
+    E2              mean=+0.0035 std=0.0015
+    IGF-1           mean=+0.0647 std=0.0079
+    BA advance      mean=+0.1596 std=0.0105
+
+  Feature correlation (bone age advance vs height-Z):
+    BA advance vs Age: r = -0.142
+    BA advance vs IGF-1: r = 0.275
+    BA advance vs LH: r = 0.078
+
+Saved: FigS1_sensitivity_controls.png
+Saved: FigS2_bootstrap_calibration.png
+Saved: FigS3_shap_importance.png
+
+======================================================================
+SENSITIVITY SUMMARY
+======================================================================
+1. Control group sensitivity:
+   Original (PP vs all non-PP): AUC = 0.880
+   PP vs non-SS only: AUC = 0.709 (delta = -0.171)
+   BA advance in LH-normal subgroup: still discriminates (AUC = 0.774)
+
+2. Bootstrap AUC 95% CI: [0.858, 0.902]
+   Brier score: 0.1461
+
+3. Permutation importance (top 3):
+   BA advance: AUC drop = +0.1596
+   Age: AUC drop = +0.1271
+   IGF-1: AUC drop = +0.0647
